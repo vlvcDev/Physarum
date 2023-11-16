@@ -1,5 +1,5 @@
 <h1> Physarum </h1>
-<strong><h3> Slime Mold </h3></strong> 
+<h2> Slime Mold </h2> 
 <p>
 <strong>Overview</strong>: The simulation creates a dynamic system that simulates the behavior of slime mold using agent-based modeling.
 </p>
