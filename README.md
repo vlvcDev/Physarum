@@ -6,28 +6,28 @@
 <p>
 <strong>Agent Properties and Behavior</strong>:
 
-<li> Number of Agents: 100,000 agents, each represented by an Agent class instance. </li>
-<li> Movement: Agents move with a customizable speed (moveSpeed) and can turn based on sensory data and random steering.</li>
-<li> Sensory Mechanism: Agents sense their environment using offset sensors and react to trails and "oats" (food sources).</li>
+<li><em>Number of Agents</em>: 100,000 agents, each represented by an Agent class instance. </li>
+<li><em>Movement</em>: Agents move with a customizable speed (moveSpeed) and can turn based on sensory data and random steering.</li>
+<li><em>Sensory Mechanism</em>: Agents sense their environment using offset sensors and react to trails and "oats" (food sources).</li>
 </p>
 <p>
 <strong>Environment</strong>:
-<li> Trail Map: An off-screen buffer (trailMap) is used to draw trails left by agents.</li>
-<li> Oats: Food sources (Oats class) randomly placed in the environment, affecting agent behavior.</li>
-<li> Diffusion and Evaporation: Trail substances diffuse and evaporate over time, with adjustable speeds for both processes.</li>
+<li><em>Trail Map</em>: An off-screen buffer (trailMap) is used to draw trails left by agents.</li>
+<li><em>Oats</em>: Food sources (Oats class) randomly placed in the environment, affecting agent behavior.</li>
+<li><em>Diffusion and Evaporation</em>: Trail substances diffuse and evaporate over time, with adjustable speeds for both processes.</li>
 </p>
 <p>
 <strong>Simulation Dynamics</strong>:
 
-<li> Agents evaluate their surroundings and make decisions on movement and direction.</li>
+<li>Agents evaluate their surroundings and make decisions on movement and direction.</li>
 <li> Trails left by agents influence the movement of other agents.</li>
 <li>Agents can find and consume oats, represented by circles.</li>
 </p>
 <p>
 <strong>User Interaction</strong>:
 
-<li> Control Panel: Implemented using the ControlP5 library, allows real-time adjustment of parameters like movement speed, turn speed, evaporation speed, and diffusion speed. </li>
-<li> Visual Feedback: The simulation provides visual feedback, including a display of the frame rate. </li>
+<li><em>Control Panel</em>: Implemented using the ControlP5 library, allows real-time adjustment of parameters like movement speed, turn speed, evaporation speed, and diffusion speed. </li>
+<li><em>Visual Feedback</em>: The simulation provides visual feedback, including a display of the frame rate. </li>
 </p>
 <p>
 <strong>Setup and Execution</strong>:
