@@ -47,6 +47,5 @@
 Below are some pictures of patterns that the slimes have made so far!
 </p>
 <br>
-<img height="700" src="![Slime1](https://github.com/vlvcDev/Physarum/assets/112003152/bd17ee83-18b6-4ac0-a06b-1ceced85878a)
-" />
+<img height="700" src="https://github.com/vlvcDev/Physarum/assets/112003152/bd17ee83-18b6-4ac0-a06b-1ceced85878a" />
 <br
