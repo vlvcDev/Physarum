@@ -42,3 +42,11 @@
 <li> The trail map is scaled up and displayed on the main canvas.</li>
 <li> Agents leave colored trails on the trail map, visually representing their movement and interactions.</li>
 </p>
+
+<p>
+Below are some pictures of patterns that the slimes have made so far!
+</p>
+<br>
+<img height="700" src="![Slime1](https://github.com/vlvcDev/Physarum/assets/112003152/bd17ee83-18b6-4ac0-a06b-1ceced85878a)
+" />
+<br
