@@ -1,26 +1,47 @@
 import controlP5.*;
 
-int numAgents = 10000; // The number of agents
-float moveSpeed = 12.0; // The speed of the agents
+int numAgents = 100000; // The number of agents
+float moveSpeed = 1.0; // The speed of the agents
 Agent[] agents; // Array to hold the agents
+Oat[] oats;
 PGraphics trailMap; // Off-screen buffer to draw the trails
 int scaleFactor = 1; // Each pixel of the trailMap will be drawn as an 8x8 block on the screen
 
 float sensorAngleOffset = PI / 4;
 float sensorOffsetDist = 25;
 int sensorSize = 1;
-float turnSpeed = 6;
+float turnSpeed = 4;
 
 float diffuseSpeed = 0.8; // Adjust as needed for diffusion speed
 float evaporationSpeed = 0.5; // Adjust as needed for evaporation speed
 float deltaTime = 1.0 / frameRate;
 
+int numOats = 10;
+float minOatRadius = 40 / scaleFactor;
+float maxOatRadius = 100 / scaleFactor;
+
 ControlP5 cp5;
+
+
+class Oat {
+  PVector position;
+  float radius;
+  
+  Oat(float x, float y, float r) {
+    position = new PVector(x,y);
+    radius = r;
+  }
+  
+  void display() {
+    ellipse(position.x, position.y, radius*2, radius*2);
+  }
+}
 
 // Define the Agent class
 class Agent {
   PVector position;
   float angle;
+  boolean isOnOat = false;
 
   Agent(float x, float y, float a) {
     position = new PVector(x, y);
@@ -77,11 +98,20 @@ class Agent {
     }
     
 
-    // Draw the trail by setting the pixel color
-    int index = (int)position.y * trailMap.width + (int)position.x;
-    if (index >= 0 && index < trailMap.pixels.length) { // Ensure the index is within the array bounds
-      trailMap.pixels[index] = color(80, 255, 60);
+    if (!isOnOat) {
+      // Draw the trail by setting the pixel color
+      int index = (int)position.y * trailMap.width + (int)position.x;
+      if (index >= 0 && index < trailMap.pixels.length) { // Ensure the index is within the array bounds
+        trailMap.pixels[index] = color(80, 255, 60);
     }
+    } else {
+      // Draw the trail by setting the pixel color
+      int index = (int)position.y * trailMap.width + (int)position.x;
+      if (index >= 0 && index < trailMap.pixels.length) { // Ensure the index is within the array bounds
+        trailMap.pixels[index] = color(120, 255, 180);
+    }
+    }
+    
   }
 }
 
@@ -101,6 +131,25 @@ float sense(Agent agent, float sensorAngleOffset) {
       if (posx >= 0 && posx < trailMap.width && posy >= 0 && posy < trailMap.height) {
         sum += brightness(trailMap.get(posx, posy));
       }
+    }
+  }
+
+  agent.isOnOat = false;
+  for (Oat oat : oats) {
+    // Calculate the distance from the sensor center to the Oat
+    float distance = PVector.dist(sensorCentre, oat.position);
+
+    // If the Oat is within the sensor range, add a positive value to sum
+    // You can adjust the 'oatAttractionStrength' and 'oatAttractionRange' to tweak the behavior
+    float oatAttractionStrength = 2000; // Determines how strongly agents are attracted to Oats
+    float oatAttractionRange = sensorOffsetDist + oat.radius; // The effective range in which an Oat influences the sensor
+
+    if (distance < oatAttractionRange) {
+      // You could also scale the added value by the distance to the Oat, if desired
+      sum += oatAttractionStrength * (oatAttractionRange - distance) / oatAttractionRange;
+    }
+    if (distance < oat.radius) { // If within the oat
+      agent.isOnOat = true;
     }
   }
   return sum;
@@ -223,6 +272,18 @@ void setup() {
 
     agents[i] = new Agent(x, y, angle);
   }
+  
+  oats = new Oat[numOats];
+  for (int i = 0; i < oats.length; i++) {
+    // Generate a random position on the screen
+    float x = random(width);
+    float y = random(height);
+    // Generate a random size for the Oat
+    float radius = random(minOatRadius, maxOatRadius);
+    // Create a new Oat and store it in the array
+    oats[i] = new Oat(x, y, radius);
+  }
+  
 }
 
 void draw() {
@@ -235,6 +296,9 @@ void draw() {
   trailMap.loadPixels();
   for (int i = 0; i < agents.length; i++) {
     agents[i].update();
+  }
+  for (int i = 0; i < oats.length; i++) {
+    oats[i].display();
   }
   trailMap.updatePixels();
   
